@@ -1,0 +1,11 @@
+<h3>Buscar país</h3>
+<hr>
+<app-pais-input (onEntrar)="buscar($event)" (onDebounce)="sugerencias($event)" hint="País..."></app-pais-input>
+
+<div class="alert" *ngIf="errores">No se encontro datos con {{pais}}</div>
+
+<div class="row" *ngIf="paises.length > 0">
+    <div class="col">
+        <app-pais-tabla [paises]="paises"></app-pais-tabla>
+    </div>
+</div>

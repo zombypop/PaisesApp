@@ -1,6 +1,6 @@
 <h3>Buscar capital</h3>
 <hr>
-<app-pais-input (onEntrar)="buscar($event)" (onDebounce)="sugerencias($event)" hint="Capital..."  ></app-pais-input>
+<app-pais-input (onEntrar)="buscar($event)" (onDebounce)="sugerencias($event)"  inPlaceholder="Capital..."  ></app-pais-input>
 
 <div class="alert" *ngIf="errores">No se encontro datos con {{pais}}</div>
 

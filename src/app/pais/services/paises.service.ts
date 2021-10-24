@@ -36,4 +36,11 @@ export class PaisesService {
       //  )
   }
 
+  buscarPorRegion(region: string): Observable<any> {
+    return this.http.get<any>(`${this.url}/regionalbloc/${region}`)
+      //  .pipe(
+      //    catchError(err => of([ ]))
+      //  )
+  }
+
 }

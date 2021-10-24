@@ -1,6 +1,22 @@
 <h3>Buscar país</h3>
 <hr>
-<app-pais-input (onEntrar)="buscar($event)" (onDebounce)="sugerencias($event)" hint="País..."></app-pais-input>
+<app-pais-input (onEntrar)="buscar($event)" (onDebounce)="sugerencias($event)" inPlaceholder="País..."></app-pais-input>
+
+
+<ul class="list-group" *ngIf="mostrarSugerencias">
+    <li class="list-group-item list-group-item-action" *ngFor="let pais of paisesSugeridos">
+        <a [routerLink]="['pais', pais.alpha2Code]" class="nav-link">{{pais.name}}</a>
+    </li>
+
+    <li class="list-group-item list-group-item-action"
+    (click)="buscarSugerido(pais)"
+    >
+        <a class="nav-link">
+            Buscar "{{pais}}"
+        </a>
+    </li>
+
+</ul>
 
 <div class="alert" *ngIf="errores">No se encontro datos con {{pais}}</div>
 

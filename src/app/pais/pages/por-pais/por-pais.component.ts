@@ -6,6 +6,11 @@ import { CountriesResponse } from '../../interfaces/paises.interface';
   selector: 'app-por-pais',
   templateUrl: './por-pais.component.html',
   styles: [
+    `
+    li {
+      cursor: pointer;
+    }
+    `
   ]
 })
 export class PorPaisComponent implements OnInit {
@@ -14,6 +19,8 @@ export class PorPaisComponent implements OnInit {
   pais: string = '';
   errores: boolean = false;
   paises: CountriesResponse[] = [];
+  paisesSugeridos: CountriesResponse[] = [];
+  mostrarSugerencias : boolean = false;
 
   constructor(private paisesServ: PaisesService) { }
 
@@ -21,6 +28,7 @@ export class PorPaisComponent implements OnInit {
   }
 
   buscar(termino: string) {
+    this.mostrarSugerencias = false;
     this.errores = false;
     this.pais = termino;
     this.paisesServ.buscarpais(termino)
@@ -40,7 +48,22 @@ export class PorPaisComponent implements OnInit {
   }
 
   sugerencias(event: any) {
-    this.errores = false; 
+    this.errores = false;
+    this.pais = event;
+    this.mostrarSugerencias = true;
+    this.paisesServ.buscarpais(event).subscribe(
+      paises => {
+        this.paisesSugeridos = (paises as CountriesResponse[]).splice(0, 5);
+        console.log(this.paisesSugeridos);
+      },
+      (err) => { this.paisesSugeridos = [] }
+
+    );
+  }
+
+  buscarSugerido(termino: string) {
+    this.buscar(termino);
+    this.mostrarSugerencias = false;
   }
 
 }

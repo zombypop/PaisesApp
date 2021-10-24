@@ -14,7 +14,7 @@ export class PaisInputComponent implements OnInit {
   pais: string = '';
   capital: string = '';
 
-  @Input() hint = '';
+  @Input() inPlaceholder = '';
 
   debouncer: Subject<string> = new Subject();
 
